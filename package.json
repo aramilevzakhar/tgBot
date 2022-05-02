@@ -9,9 +9,13 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
+    "jsdom": "^19.0.0",
+    "math": "^0.0.3",
+    "Math": "^0.0.1-security",
     "node-telegram-bot-api": "^0.57.0",
     "nodemon": "^2.0.16",
     "pg": "^8.7.3",
+    "request": "^2.88.2",
     "requests": "^0.3.0"
   }
 }
