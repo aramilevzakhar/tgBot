@@ -1,6 +1,7 @@
 process.env.NTBA_FIX_319 = 1;
 
 const TelegramBot = require('node-telegram-bot-api');
+
 const _ = require('lodash')
 
 const pg = require('pg');
@@ -32,12 +33,20 @@ for (i=0; i < token.keys; i++) {
 	console.log(i, Object.keys(token));
 }
 */
-arr = [{name: 'Fred', likes: 10}, {name: 'John', likes: 20}, {name: 'Alex', likes: 1}];
+//arr = [{name: 'Fred', likes: 10}, {name: 'John', likes: 20}, {name: 'Alex', likes: 1}];
+//let arr = fs.readFile('users.json', 'utf-8');
+//arr = JSON.parse(arr);
+
+arr = [{name: 'user1', isActive: false}, {name: 'user2', isActive: true}, {name: 'user3', isActive: false}];
 console.log(arr);
-console.log(_.sortBy(arr, x => { return x["likes"] }));
-// _.sortBy(arr, 'likes')
+arr = _.groupBy(arr, 'isActive')
+console.log(arr);
+
+
+//console.log(_.sortBy(arr, x => { return x["likes"] }));
+// arr = _.sortBy(arr, 'id')
 //arr = _.sortBy(arr, 'likes')
-console.log(arr);
+//console.log(arr);
 
 
 //console.log(token);
