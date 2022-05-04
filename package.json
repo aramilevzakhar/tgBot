@@ -9,13 +9,15 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.10",
     "jsdom": "^19.0.0",
     "math": "^0.0.3",
-    "Math": "^0.0.1-security",
+    "needle": "^3.1.0",
     "node-telegram-bot-api": "^0.57.0",
     "nodemon": "^2.0.16",
     "pg": "^8.7.3",
     "request": "^2.88.2",
-    "requests": "^0.3.0"
+    "requests": "^0.3.0",
+    "wikipedia": "^1.1.8"
   }
 }
