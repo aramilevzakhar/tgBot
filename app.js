@@ -10,10 +10,7 @@ const ndl = require('needle');
 const wiki = require('wikipedia');
 //const config = require('config');
 
-
-
-
-// const pg = require('pg');
+const pg = require('pg');
 const fs = require('fs');
 const { val } = require('cheerio/lib/api/attributes');
 const { regexpToText } = require('nodemon/lib/utils');
@@ -40,6 +37,9 @@ bot.onText(/\/echo (.+)/, async (msg, match) => {
   // send back the matched "whatever" to the chat
   await bot.sendMessage(chatId, resp);
 
+
+
+
 });
 
 
@@ -54,28 +54,46 @@ bot.onText(/\/getCourse (.+)/, async (msg, [source, match] ) => {
 	await bot.sendMessage(id, match)
 });
 
-// function sum(msg, match){ 
-//   return new Promise(function(resolve, reject){
-//       const result = x + y;
-//       resolve(result);
-//   });
-// }
+function sum(msg, match){ 
+  return new Promise(function(resolve, reject){
+      const result = x + y;
+      resolve(result);
+  });
+}
 
 bot.onText(/\/wiki (.+)/, (msg, match) => {
-  async function getWi(match) {
-    let set = match[1].split(' ');
+  const value = async (msg, match) => {
+    // let set = match[1].split(' ');
+    // let set = match[1];
+
+    // var re = /[^"].*.["$]/i;
+    var re = /\".*.\"/i;
+    let query = match[1].match(re);
+    // query = query.split('"');
+    let tmp = query[0].split("\"")[1];
+    console.log(tmp);
+    let language = match[1].split(query+" ")[1] ?? 'ru';
+    console.log(language);
+    query = tmp;
+
+    // re = /(\w+)$/i;
+    // let language = set.match(re);
+    // console.log(language);
+
+
+    // console.log(set.split(result));
     
-    
-    let query = set[0];
-    let language = set[1] ?? 'ru';
+    // let query = set[0];
+    // let language = set[1] ?? 'ru';
 
     const newUrl = await wiki.setLang(language);
     let page = await wiki.page(query);
     let summary = await page.summary();
 
+
     return Promise.resolve(summary.extract);
   };
-  getWi(msg, match)
+  const res = value(msg, match)
   .then(async (p1) => {
     await bot.sendMessage(msg.chat.id, p1);
   })
@@ -118,7 +136,6 @@ bot.onText(/\/help/, async (msg, error) => {
 });
 
 bot.onText(/\/random/, async (msg, info) => {
-  
   const chatId = msg.chat.id;
   if (msg.hasOwnProperty('reply_to_message')) {
     console.log(msg.text);  
