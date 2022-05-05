@@ -67,29 +67,24 @@ bot.onText(/\/wiki (.+)/, (msg, match) => {
     // let set = match[1];
 
     // var re = /[^"].*.["$]/i;
-    var re = /\".*.\"/i;
-    let query = match[1].match(re);
+    // var re = /\".*.\"/i;
+    // let query = match[1].match(re);
     // query = query.split('"');
-    let tmp = query[0].split("\"")[1];
-    console.log(tmp);
-    let language = match[1].split(query+" ")[1] ?? 'ru';
-    console.log(language);
-    query = tmp;
+    // let tmp = query[0].split("\"")[1];
+
+    // console.log(match);
+    let query = match[1]
 
     // re = /(\w+)$/i;
     // let language = set.match(re);
     // console.log(language);
-
-
     // console.log(set.split(result));
-    
     // let query = set[0];
     // let language = set[1] ?? 'ru';
 
-    const newUrl = await wiki.setLang(language);
+    await wiki.setLang('ru');
     let page = await wiki.page(query);
     let summary = await page.summary();
-
 
     return Promise.resolve(summary.extract);
   };
@@ -98,7 +93,7 @@ bot.onText(/\/wiki (.+)/, (msg, match) => {
     await bot.sendMessage(msg.chat.id, p1);
   })
   .catch(async (e) => { 
-    await bot.sendMessage(msg.chat.id, "Not found");
+    await bot.sendMessage(msg.chat.id, "Ничего не найдено|Not found");
     console.log("not found")
   });
 
@@ -135,6 +130,54 @@ bot.onText(/\/help/, async (msg, error) => {
   );
 });
 
+json1 = {
+  "reply_markup": {
+    "inline_keyboard": [
+      [
+        {
+          text: "click me",
+          callback_data: "hello",
+        },
+        {
+          text: "click me",
+          callback_data: "hello",
+        },
+      ],
+      [
+        {
+          text: "Channel 2",
+          callback_data: "click2",
+        },
+      ],
+      [
+        {
+          text: "Channel 3",
+          callback_data: "click",
+        },
+      ],
+      [
+        {
+          text: "Channel 4",
+          callback_data: "click2",
+        },
+      ],
+      [
+        {
+          text: "Send post to channel",
+          callback_data: "click2",
+        },
+      ],
+    ],
+    
+  }
+  
+};
+
+// bot.onText(/\/button/, async (msg, info) => {
+//   await bot.sendMessage(msg.chat.id, "Select channel", json1);
+//   console.log(json1.reply_markup.inline_keyboard[2])
+
+// });
 bot.onText(/\/random/, async (msg, info) => {
   const chatId = msg.chat.id;
   if (msg.hasOwnProperty('reply_to_message')) {
