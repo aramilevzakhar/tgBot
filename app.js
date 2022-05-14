@@ -3,7 +3,6 @@ process.env.NTBA_FIX_319 = 1;
 const TelegramBot = require('node-telegram-bot-api');
 // const axios = require('axios');
 const _ = require('lodash');
-// const request = require('request');
 const Math = require('math');
 const cheerio = require('cheerio');
 const ndl = require('needle');
