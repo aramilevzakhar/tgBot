@@ -7,7 +7,6 @@ const Math = require('math');
 const cheerio = require('cheerio');
 const ndl = require('needle');
 const wiki = require('wikipedia');
-//const config = require('config');
 
 const pg = require('pg');
 const fs = require('fs');
